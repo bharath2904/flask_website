@@ -1,6 +1,8 @@
-from app import app, db
+from app import create_app, db
 
-# ✅ Automatically create tables if not already created
+app = create_app()
+
+# ✅ Automatically create database if missing
 with app.app_context():
     db.create_all()
 
