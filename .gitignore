@@ -1,0 +1,52 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdm.toml
+*.pdm.lock
+*.egg-info/
+.eggs/
+*.so
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+env/
+*.env
+.env.*
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Flask / SQLAlchemy local files
+instance/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Pytest / Coverage / Build files
+.coverage
+htmlcov/
+dist/
+build/
+*.egg
+*.egg-info/
+
+# Deployment
+*.bak
+*.pid
+*.seed
+*.manifest

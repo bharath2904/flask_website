@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Featured</h2>
+<article class="post">
+  <h3>{{ featured.title }}</h3>
+  <div class="meta">{{ featured.created_at.strftime('%b %d, %Y') if featured.created_at else '' }}</div>
+  <p>{{ featured.content[:250] }}{% if featured.content|length > 250 %}...{% endif %}</p>
+  <p><a href="{{ url_for('main.post_detail', slug=featured.slug) }}">Read more</a></p>
+</article>
+
+<h3>Latest posts</h3>
+{% for p in posts %}
+  <article class="post">
+    <h4><a href="{{ url_for('main.post_detail', slug=p.slug) }}">{{ p.title }}</a></h4>
+    <div class="meta">{{ p.created_at.strftime('%b %d, %Y') }}</div>
+    <p>{{ p.content[:200] }}{% if p.content|length > 200 %}...{% endif %}</p>
+  </article>
+{% else %}
+  <p>No posts yet.</p>
+{% endfor %}
+{% endblock %}

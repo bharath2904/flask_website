@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin</h2>
+<form method="POST">
+  <label>Admin Key: <input type="text" name="key" placeholder="enter admin key"></label>
+  <button>Enter</button>
+</form>
+
+{% if authorized %}
+  <h3>Create New Post</h3>
+  <form method="POST" action="{{ url_for('main.create_post') }}">
+    <label>Title <input type="text" name="title" required></label>
+    <label>Slug <input type="text" name="slug" required></label>
+    <label>Content <textarea name="content" rows="6"></textarea></label>
+    <button>Create</button>
+  </form>
+
+  <h3>Existing Posts</h3>
+  {% for p in posts %}
+    <div>
+      <strong>{{ p.title }}</strong> — 
+      <a href="{{ url_for('main.edit_post', post_id=p.id) }}">edit</a> | 
+      <a href="{{ url_for('main.delete_post', post_id=p.id) }}" onclick="return confirm('Delete this post?')">delete</a>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}

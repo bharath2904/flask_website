@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title or 'My Website' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .flash {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+      margin: 10px auto;
+      width: 80%;
+      max-width: 600px;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>{{ site_name }}</h1>
+  <nav>
+    <a href="{{ url_for('main.index') }}">Home</a>
+    <a href="{{ url_for('main.posts') }}">Posts</a>
+    <a href="{{ url_for('main.about') }}">About</a>
+    <a href="{{ url_for('main.admin') }}">Admin</a>
+  </nav>
+</header>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash" id="flashMessage">{{ messages[0] }}</div>
+  {% endif %}
+{% endwith %}
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <p>Built with Flask • Customize this to match your idea</p>
+</footer>
+
+<script>
+  // Auto-hide flash message after 3 seconds
+  const flashMessage = document.getElementById('flashMessage');
+  if (flashMessage) {
+    setTimeout(() => {
+      flashMessage.style.opacity = '0';
+      setTimeout(() => flashMessage.remove(), 500); // remove after fade
+    }, 3000);
+  }
+</script>
+</body>
+</html>
